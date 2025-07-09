@@ -3,9 +3,6 @@ import streamlit as st
 import requests
 from snowflake.snowpark.functions import col
 
-smoothiefroot_response = requests.get("https://my.smoothiefroot.com/api/fruit/watermelon")
-st.text(smoothiefroot_response.json())
-
 # Write directly to the app
 st.title(f":cup_with_straw: Customize Your Smoothie! :cup_with_straw:")
 st.write(
@@ -34,7 +31,9 @@ if ingredients_list:
 
     #st.write(ingredients_string)
 
-    
+    smoothiefroot_response = requests.get("https://my.smoothiefroot.com/api/fruit/watermelon")
+    st.text(smoothiefroot_response.json())
+
     my_insert_stmt = """ insert into smoothies.public.orders(ingredients, name_on_order)
             values ('""" + ingredients_string + """', '"""+name_on_order+ """')"""
 
